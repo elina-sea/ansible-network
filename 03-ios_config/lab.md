@@ -29,9 +29,11 @@ Don't allow any changes in access list if the first line doesn't allow connectio
 
     Acl:
       - deny ip any any
-      - permit tcp host {{ ansible_server }} host {{ ansible_host }} eq 22
+      - permit tcp host {{ ansible_server }} any eq 22
     Msg:
       Skipping ACL change because of possible ssh lock.
+
+Since ACL is assigned to the VTY lines, destination host cannot be specified explicitly due to the known bug: https://www.cisco.com/c/en/us/support/docs/ip/telnet/116101-problem-telnet-00.html
 
 ## Task 5. Collect additional info about your devices
 
